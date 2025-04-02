@@ -20,7 +20,7 @@ message RegisterUserRequest {
 
 message RegisterUserResponse {
   string token = 1;
-  shared.v1.User user = 2;
+  shared.models.User user = 2;
 }
 
 message LoginUserRequest {
@@ -33,5 +33,5 @@ message LoginUserRequest {
 
 message LoginUserResponse {
   string token = 1;
-  shared.v1.User user = 2;
+  shared.models.User user = 2;
 }
