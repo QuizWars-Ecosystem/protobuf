@@ -3,7 +3,9 @@ plugins:
 
   - name: go
     out: ../internal
-    opt: paths=source_relative
+    opt:
+    - paths=source_relative
+    - module=github.com/QuizWars-Ecosystem/internal
 
   - name: go-grpc
     out: ../internal

@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package auth.v1;
 
-option go_package = "github.com/QuizWars-Ecosystem/protobuf/proto/auth/v1";
+option go_package = "github.com/QuizWars-Ecosystem/internal/proto/external/auth/v1";
 
-import "proto/shared/models/users.proto";
+import "shared/models/users.proto";
 
 service AuthService {
   rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
