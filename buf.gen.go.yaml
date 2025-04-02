@@ -5,7 +5,6 @@ plugins:
     out: ./gen
     opt:
     - paths=source_relative
-    - module=github.com/QuizWars-Ecosystem/protobuf
 
   - name: go-grpc
     out: ./gen
