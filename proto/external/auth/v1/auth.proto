@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package services.auth.v1;
+package auth.v1;
 
 option go_package = "github.com/QuizWars-Ecosystem/protobuf/proto/auth/v1";
 
