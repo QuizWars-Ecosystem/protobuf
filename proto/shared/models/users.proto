@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package shared.v1;
 
-option go_package = "./grpc/v1";
+option go_package = "github.com/QuizWars-Ecosystem/protobuf/proto/shared/models";
 
 import "google/protobuf/timestamp.proto";
 
