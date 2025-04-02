@@ -4,7 +4,7 @@ package auth.v1;
 
 option go_package = "github.com/QuizWars-Ecosystem/internal/proto/external/auth/v1";
 
-import "shared/models/users.proto";
+import "proto/shared/models/users.proto";
 
 service AuthService {
   rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
