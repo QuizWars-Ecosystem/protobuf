@@ -2,19 +2,19 @@ version: v1
 plugins:
 
   - name: go
-    out: ../internal
+    out: ./gen
     opt:
     - paths=source_relative
-    - module=github.com/QuizWars-Ecosystem/internal
+    - module=github.com/QuizWars-Ecosystem/protobuf
 
   - name: go-grpc
-    out: ../internal
+    out: ./gen
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
 
   - name: grpc-gateway
-    out: ../internal
+    out: ./gen
     opt:
       - logtostderr=true
       - paths=source_relative
