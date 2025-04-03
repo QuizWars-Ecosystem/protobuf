@@ -1,10 +1,10 @@
 # Генерация для серверов (Go)
 buf-gen-server:
-	buf generate --template buf.gen.go.yaml --path proto
+	buf generate --template buf.gen.go.yaml
 
 # Генерация для клиентов (Kotlin)
 buf-gen-client:
-	buf generate --template buf.gen.kt.yaml --path  proto/external
+	buf generate --template buf.gen.kt.yaml --path external
 
 # Линтинг и проверка
 buf-lint:

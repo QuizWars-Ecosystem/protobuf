@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package auth.v1;
+package authservice.v1;
 
-option go_package = "gen/proto/external/auth/v1";
+option go_package = "./gen/external/auth/v1";
 
 import "google/protobuf/timestamp.proto";
 
