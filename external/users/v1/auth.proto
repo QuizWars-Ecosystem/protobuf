@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package usersservice.v1;
+
+option go_package = "./gen/external/users/v1";
+
+import "google/protobuf/empty.proto";
+import "external/users/v1/shared.proto";
+
+service UsersAuthService {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (google.protobuf.Empty);
+
+  rpc OAuthLogin (OAuthLoginRequest) returns (OAuthLoginResponse);
+  rpc LinkOAuthProvider (LinkOAuthProviderRequest) returns (google.protobuf.Empty);
+}
+
+message RegisterRequest {
+  int32 avatar_id = 1;
+  string username = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message RegisterResponse {
+  string token = 1;
+  Profile profile = 2;
+}
+
+message LoginRequest {
+  oneof identifier {
+    string username = 1;
+    string email = 2;
+  }
+  string password = 3;
+}
+
+message LoginResponse {
+  string token = 1;
+  Profile profile = 2;
+}
+
+
+message LogoutRequest {
+  string user_id = 1;
+}
+message LogoutResponse {}
+
+message OAuthLoginRequest {
+  string provider = 1;
+  string code = 2;
+}
+message OAuthLoginResponse {
+  string token = 1;
+  Profile profile = 2;
+  bool is_new_user = 3;
+}
+
+message LinkOAuthProviderRequest {
+  string user_id = 1;
+  string provider = 2;
+  string code = 3;
+}
+
+
+

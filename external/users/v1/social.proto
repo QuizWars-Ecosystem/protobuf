@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package usersservice.v1;
+
+option go_package = "./gen/external/users/v1";
+
+import "external/users/v1/shared.proto";
+import "google/protobuf/empty.proto";
+
+service UsersSocialService {
+  rpc AddFriend (AddFriendRequest) returns (google.protobuf.Empty);
+  rpc AcceptFriend(AcceptFriendRequest) returns (google.protobuf.Empty);
+  rpc RemoveFriend (RemoveFriendRequest) returns (google.protobuf.Empty);
+  rpc ListFriends (ListFriendsRequest) returns (FriendsList);
+
+  rpc BlockFriend(BlockFriendRequest) returns (google.protobuf.Empty);
+  rpc UnblockFriend(UnblockFriendRequest) returns (google.protobuf.Empty);
+}
+
+message AddFriendRequest {
+  oneof identifier {
+    string friend_id = 1;
+    string friend_name = 2;
+  }
+}
+
+message AcceptFriendRequest {
+  string friend_id = 1;
+}
+
+message RemoveFriendRequest {
+  string token  = 1;
+  string friend_id = 2;
+}
+
+message ListFriendsRequest {
+  string token = 1;
+  string user_id = 2;
+}
+
+message BlockFriendRequest {
+  string token = 1;
+  string user_id = 2;
+}
+
+message UnblockFriendRequest {
+  string token = 1;
+  string user_id = 2;
+}

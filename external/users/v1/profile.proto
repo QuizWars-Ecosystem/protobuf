@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package usersservice.v1;
+
+option go_package = "./gen/external/users/v1";
+
+import "external/users/v1/shared.proto";
+import "google/protobuf/empty.proto";
+
+service UsersProfileService {
+  rpc GetProfile (GetProfileRequest) returns (Profile);
+  rpc UpdateProfile (UpdateProfileRequest) returns (google.protobuf.Empty);
+  rpc UpdateAvatar (UpdateAvatarRequest) returns (google.protobuf.Empty);
+
+  rpc ChangePassword (ChangePasswordRequest) returns (google.protobuf.Empty);
+  rpc DeleteAccount (DeleteAccountRequest) returns (google.protobuf.Empty);
+}
+
+message GetProfileRequest {
+  string user_id = 1;
+}
+
+message UpdateProfileRequest {
+  string token = 1;
+  string user_id = 2;
+  optional string username = 3;
+}
+
+message UpdateAvatarRequest {
+  string token = 1;
+  string user_id = 2;
+  int32 avatar_id = 3;
+}
+
+message ChangePasswordRequest {
+  string token = 1;
+  string user_id = 2;
+  string password = 3;
+}
+
+message DeleteAccountRequest {
+  string token = 1;
+  string user_id = 2;
+}

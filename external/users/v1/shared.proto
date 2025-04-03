@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package usersservice.v1;
+
+option go_package = "./gen/external/users/v1";
+
+import "google/protobuf/timestamp.proto";
+
+message Profile {
+  string id = 1;
+  int32 avatar_id = 2;
+  string username = 3;
+  string email = 4;
+  int32 rating = 5;
+  int64 coins = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp last_login_at = 8;
+}
+
+message User {
+  string id = 1;
+  int32 avatar_id = 2;
+  string username = 3;
+  int32 rating = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp last_login_at = 6;
+}
+
+message UserAdmin {
+  string id = 1;
+  int32 avatar_id = 2;
+  string username = 3;
+  string email = 4;
+  int32 rating = 5;
+  int64 coins = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp last_login_at = 8;
+  google.protobuf.Timestamp deleted_at = 9;
+}
+
+message FriendsList {
+  repeated Friend friends = 1;
+}
+
+message Friend {
+  User user = 1;
+  Status status = 2;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_PENDING = 1;
+  STATUS_ACCEPTED = 2;
+  STATUS_BLOCKED = 3;
+}
