@@ -18,19 +18,22 @@ service UsersSocialService {
 }
 
 message AddFriendRequest {
+  string user_id = 1;
   oneof identifier {
-    string friend_id = 1;
-    string friend_name = 2;
+    string friend_id = 2;
+    string friend_name = 3;
   }
 }
 
 message AcceptFriendRequest {
-  string friend_id = 1;
+  string user_id = 1;
+  string friend_id = 2;
 }
 
 message RemoveFriendRequest {
   string token  = 1;
-  string friend_id = 2;
+  string user_id = 2;
+  string friend_id = 3;
 }
 
 message ListFriendsRequest {
