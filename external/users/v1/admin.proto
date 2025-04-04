@@ -30,11 +30,11 @@ message SearchUsersRequest {
   uint64 page = 1;
   uint64 size = 2;
   optional Order order = 3;
-  optional
-  RatingFiler user_rating = 4;
-  CoinsFiler user_coins = 5;
-  CreateAtFiler user_created_at = 6;
-  DeletedAtFiler user_deleted_at = 7;
+  optional Sort sort = 4;
+  RatingFiler user_rating = 5;
+  CoinsFiler user_coins = 6;
+  CreateAtFiler user_created_at = 7;
+  DeletedAtFiler user_deleted_at = 8;
 }
 
 enum Order {
