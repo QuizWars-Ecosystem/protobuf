@@ -19,10 +19,7 @@ service UsersSocialService {
 
 message AddFriendRequest {
   string user_id = 1;
-  oneof identifier {
-    string friend_id = 2;
-    string friend_name = 3;
-  }
+  string friend_id = 2;
 }
 
 message AcceptFriendRequest {
