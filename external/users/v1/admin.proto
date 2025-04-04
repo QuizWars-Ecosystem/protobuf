@@ -30,6 +30,7 @@ message SearchUsersRequest {
   uint64 page = 1;
   uint64 size = 2;
   optional Order order = 3;
+  optional
   RatingFiler user_rating = 4;
   CoinsFiler user_coins = 5;
   CreateAtFiler user_created_at = 6;
@@ -45,6 +46,12 @@ enum Order {
   ORDER_COINS = 5;
   ORDER_CREATED_AT = 6;
   ORDER_DELETED_AT = 7;
+}
+
+enum Sort {
+  SORT_UNSPECIFIED = 0;
+  SORT_ASC = 1;
+  SORT_DESC = 2;
 }
 
 message RatingFiler {
@@ -71,7 +78,9 @@ message SearchUsersResponse {
   repeated UserAdmin users = 1;
   uint64 page = 2;
   uint64 size = 3;
-  int64 amount = 4;
+  Order order = 4;
+  Sort sort = 5;
+  int64 amount = 6;
 }
 
 message GetUserByIdentifierRequest {
