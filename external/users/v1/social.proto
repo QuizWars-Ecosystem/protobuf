@@ -41,9 +41,11 @@ message ListFriendsRequest {
 message BlockFriendRequest {
   string token = 1;
   string user_id = 2;
+  string friend_id = 3;
 }
 
 message UnblockFriendRequest {
   string token = 1;
   string user_id = 2;
+  string friend_id = 3;
 }

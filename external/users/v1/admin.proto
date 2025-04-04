@@ -9,11 +9,11 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
 service UsersAdminService {
-  rpc BanUser (BanUserRequest) returns (google.protobuf.Empty);
-  rpc UnbanUser (UnbanUserRequest) returns (google.protobuf.Empty);
-
   rpc SearchUsers (SearchUsersRequest) returns (SearchUsersResponse);
   rpc GetUserByIdentifier (GetUserByIdentifierRequest) returns (UserAdmin);
+
+  rpc BanUser (BanUserRequest) returns (google.protobuf.Empty);
+  rpc UnbanUser (UnbanUserRequest) returns (google.protobuf.Empty);
 }
 
 message BanUserRequest {
@@ -27,12 +27,13 @@ message UnbanUserRequest {
 }
 
 message SearchUsersRequest {
-  optional Order order = 1;
-  optional int32 limit = 2;
-  RatingFiler user_rating = 3;
-  CoinsFiler user_coins = 4;
-  CreateAtFiler user_created_at = 5;
-  DeletedAtFiler user_deleted_at = 6;
+  uint64 page = 1;
+  uint64 size = 2;
+  optional Order order = 3;
+  RatingFiler user_rating = 4;
+  CoinsFiler user_coins = 5;
+  CreateAtFiler user_created_at = 6;
+  DeletedAtFiler user_deleted_at = 7;
 }
 
 enum Order {
@@ -68,6 +69,9 @@ message DeletedAtFiler {
 
 message SearchUsersResponse {
   repeated UserAdmin users = 1;
+  uint64 page = 2;
+  uint64 size = 3;
+  int64 amount = 4;
 }
 
 message GetUserByIdentifierRequest {
