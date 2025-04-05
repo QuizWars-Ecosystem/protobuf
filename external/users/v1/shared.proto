@@ -14,7 +14,7 @@ message Profile {
   int32 rating = 5;
   int64 coins = 6;
   google.protobuf.Timestamp created_at = 7;
-  google.protobuf.Timestamp last_login_at = 8;
+  optional google.protobuf.Timestamp last_login_at = 8;
 }
 
 message User {
