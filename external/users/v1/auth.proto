@@ -24,7 +24,8 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
-  Profile profile = 1;
+  string token = 1;
+  Profile profile = 2;
 }
 
 message LoginRequest {
@@ -36,7 +37,8 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  Profile profile = 1;
+  string token = 1;
+  Profile profile = 2;
 }
 
 
@@ -46,8 +48,9 @@ message LogoutRequest {
 message LogoutResponse {}
 
 message OAuthLoginRequest {
-  string provider = 1;
-  string code = 2;
+  string token = 2;
+  string provider = 3;
+  string code = 4;
 }
 message OAuthLoginResponse {
   Profile profile = 1;
