@@ -24,8 +24,7 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
-  string token = 1;
-  Profile profile = 2;
+  Profile profile = 1;
 }
 
 message LoginRequest {
@@ -37,8 +36,7 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string token = 1;
-  Profile profile = 2;
+  Profile profile = 1;
 }
 
 
@@ -52,9 +50,8 @@ message OAuthLoginRequest {
   string code = 2;
 }
 message OAuthLoginResponse {
-  string token = 1;
-  Profile profile = 2;
-  bool is_new_user = 3;
+  Profile profile = 1;
+  bool is_new_user = 2;
 }
 
 message LinkOAuthProviderRequest {

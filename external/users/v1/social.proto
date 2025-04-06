@@ -34,24 +34,20 @@ message RejectFriendRequest {
 }
 
 message RemoveFriendRequest {
-  string token  = 1;
-  string requester_id = 2;
-  string friend_id = 3;
+  string requester_id = 1;
+  string friend_id = 2;
 }
 
 message ListFriendsRequest {
-  string token = 1;
-  string user_id = 2;
+  string user_id = 1;
 }
 
 message BlockFriendRequest {
-  string token = 1;
-  string user_id = 2;
-  string friend_id = 3;
+  string user_id = 1;
+  string friend_id = 2;
 }
 
 message UnblockFriendRequest {
-  string token = 1;
-  string user_id = 2;
-  string friend_id = 3;
+  string user_id = 1;
+  string friend_id = 2;
 }

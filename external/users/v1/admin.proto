@@ -17,25 +17,22 @@ service UsersAdminService {
 }
 
 message BanUserRequest {
-  string token = 1;
-  string user_id = 2;
+  string user_id = 1;
 }
 
 message UnbanUserRequest {
-  string token = 1;
-  string user_id = 2;
+  string user_id = 1;
 }
 
 message SearchUsersRequest {
-  string token = 1;
-  uint64 page = 2;
-  uint64 size = 3;
-  optional Order order = 4;
-  optional Sort sort = 5;
-  RatingFiler user_rating = 6;
-  CoinsFiler user_coins = 7;
-  CreateAtFiler user_created_at = 8;
-  DeletedAtFiler user_deleted_at = 9;
+  uint64 page = 1;
+  uint64 size = 2;
+  optional Order order = 3;
+  optional Sort sort = 4;
+  RatingFiler user_rating = 5;
+  CoinsFiler user_coins = 6;
+  CreateAtFiler user_created_at = 7;
+  DeletedAtFiler user_deleted_at = 8;
 }
 
 enum Order {
@@ -85,10 +82,9 @@ message SearchUsersResponse {
 }
 
 message GetUserByIdentifierRequest {
-  string token = 1;
   oneof identifier {
-    string user_id = 2;
-    string username = 3;
-    string email = 4;
+    string user_id = 1;
+    string username = 2;
+    string email = 3;
   }
 }
