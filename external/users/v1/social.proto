@@ -10,6 +10,7 @@ import "google/protobuf/empty.proto";
 service UsersSocialService {
   rpc AddFriend (AddFriendRequest) returns (google.protobuf.Empty);
   rpc AcceptFriend(AcceptFriendRequest) returns (google.protobuf.Empty);
+  rpc RejectFriend(RejectFriendRequest) returns (google.protobuf.Empty);
   rpc RemoveFriend (RemoveFriendRequest) returns (google.protobuf.Empty);
   rpc ListFriends (ListFriendsRequest) returns (FriendsList);
 
@@ -18,19 +19,24 @@ service UsersSocialService {
 }
 
 message AddFriendRequest {
-  string user_id = 1;
-  string friend_id = 2;
+  string requester_id = 1;
+  string recipient_id = 2;
 }
 
 message AcceptFriendRequest {
-  string user_id = 1;
-  string friend_id = 2;
+  string recipient_id = 1;
+  string requester_id = 2;
+}
+
+message RejectFriendRequest {
+  string recipient_id = 1;
+  string requester_id = 2;
 }
 
 message RemoveFriendRequest {
   string token  = 1;
-  string user_id = 2;
-  string friend_id = 3;
+  string requester_id = 2;
+  string friend = 3;
 }
 
 message ListFriendsRequest {
