@@ -5,7 +5,6 @@ package questions.v1;
 option go_package = "questions/v1;questionsv1";
 
 import "external/questions/v1/shared.proto";
-import "google/protobuf/empty.proto";
 
 service QuestionsService {
   rpc GetQuestionBatch(GetQuestionBatchRequest) returns (GetQuestionsBatchResponse);
