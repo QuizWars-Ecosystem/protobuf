@@ -9,13 +9,14 @@ import "google/protobuf/timestamp.proto";
 message Question {
   string id = 1;
   Type type = 2;
-  Difficulty difficulty = 3;
-  repeated string categories = 4;
-  string text = 5;
-  repeated AnswerOption options = 6;
-  string language = 7;
-  string media_url = 8;
-  google.protobuf.Timestamp created_at = 9;
+  Source source = 3;
+  Difficulty difficulty = 4;
+  repeated string categories = 5;
+  string text = 6;
+  repeated AnswerOption options = 7;
+  string language = 8;
+  string media_url = 9;
+  google.protobuf.Timestamp created_at = 10;
 }
 
 message AnswerOption {
@@ -34,6 +35,15 @@ enum Type {
   TYPE_SINGLE = 1;
   TYPE_MULTI = 2;
   TYPE_BETTING = 3;
+}
+
+enum Source {
+  SOURCE_UNSPECIFIED = 0;
+  SOURCE_TEXT = 1;
+  SOURCE_IMAGE = 2;
+  SOURCE_AUDIO = 3;
+  SOURCE_ANIMATION = 4;
+  SOURCE_VIDEO = 5;
 }
 
 enum Difficulty {
