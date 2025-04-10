@@ -5,11 +5,12 @@ package questions.v1;
 option go_package = "questions/v1;questionsv1";
 
 import "google/protobuf/empty.proto";
+import "external/questions/v1/shared.proto";
 
 service QuestionsClientService {
   rpc GetCategories(google.protobuf.Empty) returns (GetCategoriesResponse);
 }
 
 message GetCategoriesResponse {
-  repeated string categories = 1;
+  repeated Category categories = 1;
 }
