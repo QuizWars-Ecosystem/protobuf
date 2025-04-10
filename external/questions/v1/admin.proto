@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package questions.v1;
+
+option go_package = "questions/v1;questionsv1";
+
+import "external/questions/v1/shared.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service QuestionsAdminService {
+  rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
+  rpc UpdateQuestion(UpdateQuestionRequest) returns (google.protobuf.Empty);
+  rpc DeleteQuestion(DeleteQuestionRequest) returns (google.protobuf.Empty);
+  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
+}
+
+message CreateQuestionRequest {
+  Type type = 1;
+  Difficulty difficulty = 2;
+  repeated string categories = 3;
+  string text = 4;
+  repeated AnswerOption options = 5;
+  string language = 6;
+  optional string media_url = 7;
+}
+
+message UpdateQuestionRequest {
+  string id = 1;
+  optional Type type = 2;
+  optional Difficulty difficulty = 3;
+  repeated string categories = 4;
+  optional string text = 5;
+  repeated AnswerOption options = 6;
+  optional string language = 7;
+  optional string media_url = 8;
+}
+
+message DeleteQuestionRequest {
+  string id = 1;
+}
+
+message GetQuestionsRequest {
+  uint64 page = 1;
+  uint64 size = 2;
+  optional Order order = 3;
+  optional Sort sort = 4;
+  optional TypeFilter type_filter = 5;
+  optional DifficultyFilter difficulty_filter = 6;
+  optional CategoryFilter category_filter = 7;
+  optional LanguageFilter language_filter = 8;
+  optional CreatedAtFilter create_at_filter = 9;
+}
+
+message GetQuestionsResponse {
+  repeated Question questions = 1;
+  uint64 page = 2;
+  uint64 size = 3;
+  Order order = 4;
+  Sort sort = 5;
+  int64 amount = 6;
+}
+
+enum Order {
+  ORDER_UNSPECIFIED = 0;
+  ORDER_TYPE = 1;
+  ORDER_DIFFICULTY = 2;
+  ORDER_CATEGORIES = 3;
+  ORDER_LANGUAGE = 4;
+  ORDER_CREATED_AT = 5;
+}
+
+enum Sort {
+  SORT_UNSPECIFIED = 0;
+  SORT_ASC = 1;
+  SORT_DESC = 2;
+}
+
+message TypeFilter {
+  repeated Type types = 1;
+}
+
+message DifficultyFilter {
+  repeated Difficulty difficulties = 1;
+}
+
+message CategoryFilter {
+  repeated string categories = 1;
+}
+
+message LanguageFilter {
+  repeated string languages = 1;
+}
+
+message CreatedAtFilter {
+  google.protobuf.Timestamp from = 1;
+  google.protobuf.Timestamp to = 2;
+}

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package questions.v1;
 
-option go_package = "shared/questions/v1;questionsv1";
+option go_package = "questions/v1;questionsv1";
 
 import "google/protobuf/timestamp.proto";
 
@@ -22,6 +22,11 @@ message AnswerOption {
   string id = 1;
   string text = 2;
   bool is_correct = 3;
+}
+
+message Category {
+  int64 id = 1;
+  string name = 2;
 }
 
 enum Type {
