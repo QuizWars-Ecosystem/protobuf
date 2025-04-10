@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package questions.v1;
+
+option go_package = "questions/v1;questionsv1";
+
+import "google/protobuf/timestamp.proto";
+
+message Question {
+  string id = 1;
+  Type type = 2;
+  Difficulty difficulty = 3;
+  repeated string categories = 4;
+  string text = 5;
+  repeated AnswerOption options = 6;
+  string language = 7;
+  string media_url = 8;
+  google.protobuf.Timestamp created_at = 9;
+}
+
+message AnswerOption {
+  string id = 1;
+  string text = 2;
+  bool is_correct = 3;
+}
+
+enum Type {
+  TYPE_UNSPECIFIED = 0;
+  TYPE_SINGLE = 1;
+  TYPE_MULTI = 2;
+  TYPE_BETTING = 3;
+}
+
+enum Difficulty {
+  DIFFICULTY_UNSPECIFIED = 0;
+  DIFFICULTY_EASY = 1;
+  DIFFICULTY_MEDIUM = 2;
+  DIFFICULTY_HARD = 3;
+  DIFFICULTY_VERY_HARD = 4;
+}

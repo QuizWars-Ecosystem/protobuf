@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package questions.v1;
+
+option go_package = "questions/v1;questionsv1";
+
+import "shared/questions/v1/shared.proto";
+
+service QuestionsService {
+  rpc GetQuestionBatch(GetQuestionBatchRequest) returns (GetQuestionsBatchResponse);
+}
+
+message GetQuestionBatchRequest {
+  repeated string categories = 1;
+  Difficulty difficulty = 2;
+  string language = 3;
+  int32 count = 4;
+}
+
+message GetQuestionsBatchResponse {
+  repeated Question questions = 1;
+}
