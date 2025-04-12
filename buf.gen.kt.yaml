@@ -1,8 +1,8 @@
 version: v1
 plugins:
   - name: java
-    out: ./mobile/app/src/main/java/gen
+    out: ../mobile/app/src/main/java/gen
   - name: grpc-kotlin
-    out: ./mobile/app/src/main/kotlin/gen
+    out: ../mobile/app/src/main/kotlin/gen
     opt:
       - generate_kotlin_if=proto.is_in_external_dir
