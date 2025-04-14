@@ -29,7 +29,7 @@ message UpdateQuestionRequest {
   string id = 1;
   optional Type type = 2;
   optional Difficulty difficulty = 3;
-  repeated string categories = 4;
+  optional int32 category_id = 4;
   optional string text = 5;
   repeated Option options = 6;
   optional string language = 7;

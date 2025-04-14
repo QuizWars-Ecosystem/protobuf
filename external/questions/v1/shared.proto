@@ -11,7 +11,7 @@ message Question {
   Type type = 2;
   Source source = 3;
   Difficulty difficulty = 4;
-  repeated string categories = 5;
+  Category category = 5;
   string text = 6;
   repeated Option options = 7;
   string language = 8;
