@@ -11,7 +11,9 @@ import "google/protobuf/empty.proto";
 service QuestionsAdminService {
   rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestion(UpdateQuestionRequest) returns (google.protobuf.Empty);
+  rpc UpdateQuestionOption(UpdateQuestionOptionRequest) returns (google.protobuf.Empty);
   rpc DeleteQuestion(DeleteQuestionRequest) returns (google.protobuf.Empty);
+  rpc DeleteQuestionOption(DeleteQuestionOptionRequest) returns (google.protobuf.Empty);
   rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
 }
 
@@ -35,7 +37,17 @@ message UpdateQuestionRequest {
   optional string language = 7;
 }
 
+message UpdateQuestionOptionRequest {
+  string id = 1;
+  optional string text = 2;
+  optional bool is_correct = 3;
+}
+
 message DeleteQuestionRequest {
+  string id = 1;
+}
+
+message DeleteQuestionOptionRequest {
   string id = 1;
 }
 
