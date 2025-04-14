@@ -18,7 +18,7 @@ service QuestionsAdminService {
 message CreateQuestionRequest {
   Type type = 1;
   Difficulty difficulty = 2;
-  repeated string categories = 3;
+  int32 category_id = 3;
   string text = 4;
   repeated Option options = 5;
   string language = 6;
