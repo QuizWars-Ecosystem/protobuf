@@ -9,13 +9,13 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
 service QuestionsAdminService {
+  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
   rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
   rpc UpdateCategory(UpdateCategoryRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestion(UpdateQuestionRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestionOption(UpdateQuestionOptionRequest) returns (google.protobuf.Empty);
   rpc DeleteQuestion(DeleteQuestionRequest) returns (google.protobuf.Empty);
   rpc DeleteQuestionOption(DeleteQuestionOptionRequest) returns (google.protobuf.Empty);
-  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
 }
 
 message CreateQuestionRequest {
@@ -82,7 +82,7 @@ enum Order {
   ORDER_UNSPECIFIED = 0;
   ORDER_TYPE = 1;
   ORDER_DIFFICULTY = 2;
-  ORDER_CATEGORIES = 3;
+  ORDER_CATEGORY = 3;
   ORDER_LANGUAGE = 4;
   ORDER_CREATED_AT = 5;
 }
