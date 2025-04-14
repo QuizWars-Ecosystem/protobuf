@@ -102,7 +102,7 @@ message DifficultyFilter {
 }
 
 message CategoryFilter {
-  repeated string categories = 1;
+  repeated int32 categories = 1;
 }
 
 message LanguageFilter {
