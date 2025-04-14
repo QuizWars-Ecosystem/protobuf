@@ -11,7 +11,7 @@ service QuestionsService {
 }
 
 message GetQuestionBatchRequest {
-  repeated string categories = 1;
+  repeated int32 categories = 1;
   Difficulty difficulty = 2;
   string language = 3;
   int32 count = 4;
