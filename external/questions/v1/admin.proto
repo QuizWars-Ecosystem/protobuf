@@ -10,6 +10,7 @@ import "google/protobuf/empty.proto";
 
 service QuestionsAdminService {
   rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestion(UpdateQuestionRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestionOption(UpdateQuestionOptionRequest) returns (google.protobuf.Empty);
   rpc DeleteQuestion(DeleteQuestionRequest) returns (google.protobuf.Empty);
@@ -25,6 +26,11 @@ message CreateQuestionRequest {
   repeated Option options = 5;
   string language = 6;
   optional string media_url = 7;
+}
+
+message UpdateCategoryRequest {
+  int32 id = 1;
+  string name = 2;
 }
 
 message UpdateQuestionRequest {
