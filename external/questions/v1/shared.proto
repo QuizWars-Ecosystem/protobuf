@@ -15,8 +15,7 @@ message Question {
   string text = 6;
   repeated Option options = 7;
   string language = 8;
-  string media_url = 9;
-  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp created_at = 9;
 }
 
 message Option {

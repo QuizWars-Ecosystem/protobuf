@@ -33,7 +33,6 @@ message UpdateQuestionRequest {
   optional string text = 5;
   repeated Option options = 6;
   optional string language = 7;
-  optional string media_url = 8;
 }
 
 message DeleteQuestionRequest {
