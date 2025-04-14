@@ -13,13 +13,13 @@ message Question {
   Difficulty difficulty = 4;
   repeated string categories = 5;
   string text = 6;
-  repeated AnswerOption options = 7;
+  repeated Option options = 7;
   string language = 8;
   string media_url = 9;
   google.protobuf.Timestamp created_at = 10;
 }
 
-message AnswerOption {
+message Option {
   string id = 1;
   string text = 2;
   bool is_correct = 3;

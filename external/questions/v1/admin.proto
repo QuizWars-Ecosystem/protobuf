@@ -20,7 +20,7 @@ message CreateQuestionRequest {
   Difficulty difficulty = 2;
   repeated string categories = 3;
   string text = 4;
-  repeated AnswerOption options = 5;
+  repeated Option options = 5;
   string language = 6;
   optional string media_url = 7;
 }
@@ -31,7 +31,7 @@ message UpdateQuestionRequest {
   optional Difficulty difficulty = 3;
   repeated string categories = 4;
   optional string text = 5;
-  repeated AnswerOption options = 6;
+  repeated Option options = 6;
   optional string language = 7;
   optional string media_url = 8;
 }
