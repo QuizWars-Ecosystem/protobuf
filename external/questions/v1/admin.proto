@@ -39,8 +39,7 @@ message UpdateQuestionRequest {
   optional Difficulty difficulty = 3;
   optional int32 category_id = 4;
   optional string text = 5;
-  repeated Option options = 6;
-  optional string language = 7;
+  optional string language = 6;
 }
 
 message UpdateQuestionOptionRequest {
