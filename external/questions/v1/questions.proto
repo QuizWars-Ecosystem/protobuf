@@ -7,16 +7,26 @@ option go_package = "questions/v1;questionsv1";
 import "external/questions/v1/shared.proto";
 
 service QuestionsService {
-  rpc GetQuestionBatch(GetQuestionBatchRequest) returns (GetQuestionsBatchResponse);
+  rpc GetQuestions(GetQuestionsRequest) returns (QuestionsResponse);
+  rpc GetQuestionBatch(GetQuestionBatchRequest) returns (QuestionsResponse);
+}
+
+message GetQuestionsRequest {
+  Difficulty difficulty = 1;
+  string language = 2;
+  int32 category_id = 3;
+  int32 amount = 4;
 }
 
 message GetQuestionBatchRequest {
-  repeated int32 categories = 1;
-  Difficulty difficulty = 2;
-  string language = 3;
-  int32 count = 4;
+  repeated Type types = 1;
+  repeated Source sources = 2;
+  repeated Difficulty difficulties = 3;
+  repeated int32 categories_ids = 4;
+  string language = 5;
+  int32 amount = 6;
 }
 
-message GetQuestionsBatchResponse {
+message QuestionsResponse {
   repeated Question questions = 1;
 }
