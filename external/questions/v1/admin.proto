@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
 service QuestionsAdminService {
-  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
+  rpc GetFilteredQuestions(GetFilteredQuestionsRequest) returns (GetFilteredQuestionsResponse);
   rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
   rpc UpdateCategory(UpdateCategoryRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestion(UpdateQuestionRequest) returns (google.protobuf.Empty);
@@ -57,7 +57,7 @@ message DeleteQuestionOptionRequest {
   string id = 1;
 }
 
-message GetQuestionsRequest {
+message GetFilteredQuestionsRequest {
   uint64 page = 1;
   uint64 size = 2;
   optional Order order = 3;
@@ -69,7 +69,7 @@ message GetQuestionsRequest {
   optional CreatedAtFilter create_at_filter = 9;
 }
 
-message GetQuestionsResponse {
+message GetFilteredQuestionsResponse {
   repeated Question questions = 1;
   uint64 page = 2;
   uint64 size = 3;
