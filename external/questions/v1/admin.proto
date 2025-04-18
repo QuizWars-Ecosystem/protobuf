@@ -10,12 +10,21 @@ import "google/protobuf/empty.proto";
 
 service QuestionsAdminService {
   rpc GetFilteredQuestions(GetFilteredQuestionsRequest) returns (GetFilteredQuestionsResponse);
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse);
   rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
   rpc UpdateCategory(UpdateCategoryRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestion(UpdateQuestionRequest) returns (google.protobuf.Empty);
   rpc UpdateQuestionOption(UpdateQuestionOptionRequest) returns (google.protobuf.Empty);
   rpc DeleteQuestion(DeleteQuestionRequest) returns (google.protobuf.Empty);
   rpc DeleteQuestionOption(DeleteQuestionOptionRequest) returns (google.protobuf.Empty);
+}
+
+message CreateCategoryRequest {
+  string name = 1;
+}
+
+message CreateCategoryResponse {
+  int32 id = 1;
 }
 
 message CreateQuestionRequest {
