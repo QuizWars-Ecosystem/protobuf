@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package questions.v1;
 
-option go_package = "questions/v1;questionsv1";
+option go_package = "questions-service/v1;questionsv1";
 
 import "google/protobuf/timestamp.proto";
 
