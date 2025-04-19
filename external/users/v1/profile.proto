@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package users.v1;
+package usersservice.v1;
 
-option go_package = "users-service/v1;usersv1";
+option go_package = "users/v1;usersv1";
 
 import "external/users/v1/shared.proto";
 import "google/protobuf/empty.proto";
