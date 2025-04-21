@@ -12,16 +12,10 @@ service UsersAdminService {
   rpc SearchUsers (SearchUsersRequest) returns (SearchUsersResponse);
   rpc GetUserByIdentifier (GetUserByIdentifierRequest) returns (UserAdmin);
 
+  rpc UpdateUserRole(UpdateUserRoleRequest) returns (google.protobuf.Empty);
+
   rpc BanUser (BanUserRequest) returns (google.protobuf.Empty);
   rpc UnbanUser (UnbanUserRequest) returns (google.protobuf.Empty);
-}
-
-message BanUserRequest {
-  string user_id = 1;
-}
-
-message UnbanUserRequest {
-  string user_id = 1;
 }
 
 message SearchUsersRequest {
@@ -87,4 +81,24 @@ message GetUserByIdentifierRequest {
     string username = 2;
     string email = 3;
   }
+}
+
+message BanUserRequest {
+  string user_id = 1;
+}
+
+message UnbanUserRequest {
+  string user_id = 1;
+}
+
+message UpdateUserRoleRequest {
+  string user_id = 1;
+  Role role = 2;
+}
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_USER = 1;
+  ROLE_ADMIN = 2;
+  ROLE_SUPER = 3;
 }
