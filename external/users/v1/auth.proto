@@ -7,15 +7,30 @@ option go_package = "users/v1;usersv1";
 import "google/protobuf/empty.proto";
 import "external/users/v1/shared.proto";
 
+/**
+* User Auth Service manage of user's register, logging and logout in system
+*/
 service UsersAuthService {
+
+  // Method for register new user in system, all filed are required. Returns created user profile on success and JWT token for usage
   rpc Register(RegisterRequest) returns (RegisterResponse);
+
+  // Allow already registered users login in system using email or username an password. Returns user profile and JWT token
   rpc Login(LoginRequest) returns (LoginResponse);
+
+  // Logout method mark user profile inactive in system and update git last login date. Can be use by user or client
   rpc Logout(LogoutRequest) returns (google.protobuf.Empty);
 
+  // UNIMPLEMENTED - Allow register of login users using OAuth2 tools. Returns user profile, JWT token and bool flag if user is new
   rpc OAuthLogin (OAuthLoginRequest) returns (OAuthLoginResponse);
+
+  // UNIMPLEMENTED - Allow already registered user connect system profile with his account that provides OAuth2 tools
   rpc LinkOAuthProvider (LinkOAuthProviderRequest) returns (google.protobuf.Empty);
 }
 
+/**
+* Represents register method argument for register new profile in system. All fields are required for action
+*/
 message RegisterRequest {
   int32 avatar_id = 1;
   string username = 2;
@@ -23,40 +38,60 @@ message RegisterRequest {
   string password = 4;
 }
 
+/**
+* Message that contain registered profile and JWT token for future usage
+*/
 message RegisterResponse {
   string token = 1;
   Profile profile = 2;
 }
 
+/**
+* Represents login method argument that allows user login in system
+*/
 message LoginRequest {
-  oneof identifier {
+  oneof identifier { // Required one of user identifier, in can be username or email
     string username = 1;
     string email = 2;
   }
   string password = 3;
 }
 
+/**
+* Represents result of login request, contain user's profile and JWT token
+*/
 message LoginResponse {
   string token = 1;
   Profile profile = 2;
 }
 
-
+/**
+* Message for request to logout, user id is required
+*/
 message LogoutRequest {
   string user_id = 1;
 }
-message LogoutResponse {}
 
+/**
+* Message is argument of request to register or login in system using OAuth2 providers
+*/
 message OAuthLoginRequest {
-  string token = 2;
-  string provider = 3;
-  string code = 4;
+  string token = 1; // Provider token
+  string provider = 2; // Name of provider
+  string code = 3; // Code of provider
 }
+
+/**
+* Represents a result of method for login or register via OAuth2
+*/
 message OAuthLoginResponse {
   Profile profile = 1;
   bool is_new_user = 2;
 }
 
+/**
+* Represents rpc method argument for link existing system account with OAuth2 providers
+*/
 message LinkOAuthProviderRequest {
   string user_id = 1;
   string provider = 2;
