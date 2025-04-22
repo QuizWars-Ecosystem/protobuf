@@ -21,3 +21,15 @@ go-install-deps:
 kotlin-install-deps:
 	curl -o protoc-gen-grpc-kotlin.jar -L https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-kotlin/1.4.0/protoc-gen-grpc-kotlin-1.4.0-jdk8.jar &&
 	chmod +x protoc-gen-grpc-kotlin.jar
+
+buf-gen-doc:
+	buf generate --template buf.gen.doc.yaml
+
+gen-doc:
+	protoc \
+		--proto_path=. \
+		--doc_out=../docs/QuizWars/tech/grpc \
+		--doc_opt=markdown,Proto.md \
+		./external/users/v1/*.proto \
+		./external/questions/v1/*.proto
+

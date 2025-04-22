@@ -8,25 +8,55 @@ import "external/users/v1/shared.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
+/**
+* Users Admin Service has methods for manage user's profiles via Admin access
+*/
 service UsersAdminService {
+
+  /**
+  * Search users profile with pagination and filters
+  * Auth: Admin
+  */
   rpc SearchUsers (SearchUsersRequest) returns (SearchUsersResponse);
+
+  /**
+  * Get User profile with Admin view, possible use one of profile identifier.
+  * It can be id, email or username.
+  * Auth: Admin
+  */
   rpc GetUserByIdentifier (GetUserByIdentifierRequest) returns (UserAdmin);
 
+  /**
+  * Set new user profile role
+  * Auth: Super
+  */
   rpc UpdateUserRole(UpdateUserRoleRequest) returns (google.protobuf.Empty);
 
+  /**
+  * Method for ban user, it's happens by set delete_at a date. After ban, impossible login.
+  * Auth: Super
+  */
   rpc BanUser (BanUserRequest) returns (google.protobuf.Empty);
+
+  /**
+  * Method for unban user profile, it's happens by set delete_at a null.
+  * Auth: Super
+  */
   rpc UnbanUser (UnbanUserRequest) returns (google.protobuf.Empty);
 }
 
+/**
+* Represent filter for searching users profiles, has required fields
+*/
 message SearchUsersRequest {
-  uint64 page = 1;
-  uint64 size = 2;
-  optional Order order = 3;
-  optional Sort sort = 4;
-  RatingFiler user_rating = 5;
-  CoinsFiler user_coins = 6;
-  CreateAtFiler user_created_at = 7;
-  DeletedAtFiler user_deleted_at = 8;
+  uint64 page = 1; // Value of taget page, default must be 1
+  uint64 size = 2; // Amount of desired entities amount, try use with limit
+  optional Order order = 3; // Optional order, default is username
+  optional Sort sort = 4; // Optional sort, default is ASC
+  RatingFiler user_rating = 5; // Optional filter, from-to rating window
+  CoinsFiler user_coins = 6; // Optional filter, from-to coins window
+  CreateAtFiler user_created_at = 7; // Optional filter, from-to register date window
+  DeletedAtFiler user_deleted_at = 8; // Optional filter, from-to deleted (banned) date window
 }
 
 enum Order {
@@ -66,31 +96,46 @@ message DeletedAtFiler {
   google.protobuf.Timestamp to = 2;
 }
 
+/**
+* Represent result of searching users.
+*/
 message SearchUsersResponse {
-  repeated UserAdmin users = 1;
-  uint64 page = 2;
-  uint64 size = 3;
-  Order order = 4;
-  Sort sort = 5;
-  int64 amount = 6;
+  repeated UserAdmin users = 1; // Array of user's profiles that has additional fields that able only for admin view
+  uint64 page = 2; // Current page, allow work with pagination
+  uint64 size = 3; // Current page size value
+  Order order = 4; // Order what was used to get current result
+  Sort sort = 5; // Sort type that was used for get current result
+  int64 amount = 6; // Amount of all user's profiles that able to get using the same request filter
 }
 
+/**
+* Represent of request argument what allow admin get specified user by one of his identifier: id, username, email
+*/
 message GetUserByIdentifierRequest {
-  oneof identifier {
+  oneof identifier { // Indicate one of field for get user profile
     string user_id = 1;
     string username = 2;
     string email = 3;
   }
 }
 
+/**
+* Represent argument of method for ban user, user id required
+*/
 message BanUserRequest {
   string user_id = 1;
 }
 
+/**
+* Represent argument of method for unban user, user id required
+*/
 message UnbanUserRequest {
   string user_id = 1;
 }
 
+/**
+* Represent argument of request for set a user new role, user id and enum role required
+*/
 message UpdateUserRoleRequest {
   string user_id = 1;
   Role role = 2;

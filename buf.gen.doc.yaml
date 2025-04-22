@@ -1,0 +1,7 @@
+version: v1
+plugins:
+
+  - name: doc
+    out: ../docs/QuizWars/tech/grpc
+    opt:
+      - markdown,proto.md,source_relative
