@@ -7,22 +7,46 @@ option go_package = "users/v1;usersv1";
 import "external/users/v1/shared.proto";
 import "google/protobuf/empty.proto";
 
+/**
+* User Profile Service contain methods for self manage user profile
+*/
 service UsersProfileService {
+
+  // Method allow get existing user profile user his id or username. For self profile request user get more infirmation, for side user less
+  // Auth: Self/User
   rpc GetProfile (GetProfileRequest) returns (GetProfileResponse);
+
+  // Method allow user update his account
+  // Auth: Self
   rpc UpdateProfile (UpdateProfileRequest) returns (google.protobuf.Empty);
+
+  // Method allow user update hiw profile avatar
+  // Auth: Self
   rpc UpdateAvatar (UpdateAvatarRequest) returns (google.protobuf.Empty);
 
+  // Method allow user reset his password
+  // Auth: Self
   rpc ChangePassword (ChangePasswordRequest) returns (google.protobuf.Empty);
+
+  // Method allow user delete his account (not fully)
+  // Auth: Self
   rpc DeleteAccount (DeleteAccountRequest) returns (google.protobuf.Empty);
 }
 
+/**
+* Represents request argument for getting user profile. Required on of identifier
+*/
 message GetProfileRequest {
-  oneof identifier {
+  oneof identifier { // Here can be user id or username
     string user_id = 1;
     string username = 2;
   }
 }
 
+/**
+* Represents request result of getting user profile. Contain one of possible data. Profile what can be requester only his owner
+* or User (short profile) what can be requested anyone
+*/
 message GetProfileResponse {
   oneof data {
     Profile profile = 1;
@@ -30,21 +54,34 @@ message GetProfileResponse {
   }
 }
 
+/**
+* Represents request argument for update some user's account data. User id always required, any others files are optional.
+* They can be provided seperated or in one message
+*/
 message UpdateProfileRequest {
   string user_id = 1;
   optional string username = 2;
 }
 
+/**
+* Represents request argument for set new profile's avatar id. User id always required
+*/
 message UpdateAvatarRequest {
   string user_id = 1;
   int32 avatar_id = 2;
 }
 
+/**
+* Represents request message for reset user's profile password. User id always required
+*/
 message ChangePasswordRequest {
   string user_id = 1;
   string password = 2;
 }
 
+/**
+* Message that required user id for mark his account as deleted in system
+*/
 message DeleteAccountRequest {
   string user_id = 1;
 }
