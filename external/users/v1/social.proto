@@ -7,46 +7,85 @@ option go_package = "users/v1;usersv1";
 import "external/users/v1/shared.proto";
 import "google/protobuf/empty.proto";
 
+/**
+* Users Social Service allow users be active with others users
+*/
 service UsersSocialService {
+
+  // Method for asking another user be friends. It adds requested user request message on friendship
   rpc AddFriend (AddFriendRequest) returns (google.protobuf.Empty);
+
+  // Method that set message on friendship active and adds users in shared relation (make users mutual related)
   rpc AcceptFriend(AcceptFriendRequest) returns (google.protobuf.Empty);
+
+  // Method that reject message on friendship from requester
   rpc RejectFriend(RejectFriendRequest) returns (google.protobuf.Empty);
+
+  // Method removes already created and active friendship between two users
   rpc RemoveFriend (RemoveFriendRequest) returns (google.protobuf.Empty);
+
+  // Method for get all relations for specified user, result is users list with any relation (active/inactive)
   rpc ListFriends (ListFriendsRequest) returns (FriendsList);
 
+  // Method for blocking friend (they will be not able to communicate witch each other)
+  // Auth: Self
   rpc BlockFriend(BlockFriendRequest) returns (google.protobuf.Empty);
+
+  // Method is reverse action of blocking. Allows user remove friend from black list
+  // Auth: Self
   rpc UnblockFriend(UnblockFriendRequest) returns (google.protobuf.Empty);
 }
 
+/**
+* Represents request argument for creating friendship, all fields are required
+*/
 message AddFriendRequest {
-  string requester_id = 1;
-  string recipient_id = 2;
+  string requester_id = 1; // Requested id is id of user that is initiator of action
+  string recipient_id = 2; // Recipient id is id of user that is terminator of action
 }
 
+/**
+* Represents request argument for make friendship active, all fields are required
+*/
 message AcceptFriendRequest {
-  string recipient_id = 1;
-  string requester_id = 2;
+  string recipient_id = 1; // Recipient id is id of user that got friendship request on want to act
+  string requester_id = 2; // Requester id is id of user that was a initiator of the action
 }
 
+/**
+* Represents request argument for rejecting proposed friendship, all fields are required
+*/
 message RejectFriendRequest {
-  string recipient_id = 1;
-  string requester_id = 2;
+  string recipient_id = 1; // Recipient id is id of user that got request on friendship but wants to reject it
+  string requester_id = 2; // Requester id is id of user that was a initiator of the action
 }
 
+/**
+* Represents request argument for remove already existing friendship between users, all fields are required
+*/
 message RemoveFriendRequest {
-  string requester_id = 1;
-  string friend_id = 2;
+  string requester_id = 1; // Recipient id is id of user that is initiator of removing friendship
+  string friend_id = 2; // Friend id is id of user that is a friend of removing friendship initiator
 }
 
+/**
+* Represents request argument for getting all his friends as a list
+*/
 message ListFriendsRequest {
-  string user_id = 1;
+  string user_id = 1; // User id of initiator of get list friends action (self)
 }
 
+/**
+* Represents request argument for block friend. It will mark their friendship as blocked
+*/
 message BlockFriendRequest {
   string user_id = 1;
   string friend_id = 2;
 }
 
+/**
+* Represents request argument for unblock friend. It will mark their friendship as active (accepted)
+*/
 message UnblockFriendRequest {
   string user_id = 1;
   string friend_id = 2;
