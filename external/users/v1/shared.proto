@@ -6,50 +6,62 @@ option go_package = "users/v1;usersv1";
 
 import "google/protobuf/timestamp.proto";
 
+/**
+* Message represents user profile that can be shown only for his owner
+*/
 message Profile {
-  string id = 1;
-  int32 avatar_id = 2;
-  string username = 3;
-  string email = 4;
-  int32 rating = 5;
-  int64 coins = 6;
-  google.protobuf.Timestamp created_at = 7;
-  optional google.protobuf.Timestamp last_login_at = 8;
+  string id = 1; // User if is actually UUID
+  int32 avatar_id = 2; // Is a id of avatars preset
+  string username = 3; // Username is a string, no longer then 32 char
+  string email = 4; // Email is a string, no longer then 128 char
+  int32 rating = 5;  // Is a int filed that represents user rating
+  int64 coins = 6; // Is a int value that represents amount of user's coins
+  google.protobuf.Timestamp created_at = 7; // Is a date when user was registered, cannot be null
+  optional google.protobuf.Timestamp last_login_at = 8; // Is a date when user was last active, can be null
 }
 
+/**
+* Message represents user profile that can be shown anyone
+*/
 message User {
-  string id = 1;
-  int32 avatar_id = 2;
-  string username = 3;
-  int32 rating = 4;
-  google.protobuf.Timestamp created_at = 5;
-  optional google.protobuf.Timestamp last_login_at = 6;
+  string id = 1; // User if is actually UUID
+  int32 avatar_id = 2; // Is a id of avatars preset
+  string username = 3; // Username is a string, no longer then 32 char
+  int32 rating = 4; // Is a int filed that represents user rating
+  google.protobuf.Timestamp created_at = 5; // Is a date when user was registered, cannot be null
+  optional google.protobuf.Timestamp last_login_at = 6; // Is a date when user was last active, can be null
 }
 
+/**
+* Message represents user profile that can be shown only admin
+*/
 message UserAdmin {
-  string id = 1;
-  int32 avatar_id = 2;
-  string username = 3;
-  string email = 4;
-  int32 rating = 5;
-  int64 coins = 6;
-  google.protobuf.Timestamp created_at = 7;
-  optional google.protobuf.Timestamp last_login_at = 8;
-  optional google.protobuf.Timestamp deleted_at = 9;
+  string id = 1; // User if is actually UUID
+  int32 avatar_id = 2; // Is a id of avatars preset
+  string username = 3; // Username is a string, no longer then 32 char
+  string email = 4; // Email is a string, no longer then 128 char
+  int32 rating = 5; // Is a int filed that represents user rating
+  int64 coins = 6; // Is a int value that represents amount of user's coins
+  google.protobuf.Timestamp created_at = 7; // Is a date when user was registered, cannot be null
+  optional google.protobuf.Timestamp last_login_at = 8; // Is a date when user was last active, can be null
+  optional google.protobuf.Timestamp deleted_at = 9; // Is a date when user profile was deleted by owner or banned by admin
 }
 
+/**
+* Message represents user's friends, actually is a list io user profiles with friendship status
+*/
 message FriendsList {
   repeated Friend friends = 1;
 }
 
 message Friend {
-  User user = 1;
-  Status status = 2;
+  User user = 1; // A user that interact with another
+  Status status = 2; // Status of friendship, this is shared status, it means if one person accepted request on fiendship, it will be accepted fot both
 }
 
 enum Status {
-  STATUS_UNSPECIFIED = 0;
-  STATUS_PENDING = 1;
-  STATUS_ACCEPTED = 2;
-  STATUS_BLOCKED = 3;
+  STATUS_UNSPECIFIED = 0; // Is technical status
+  STATUS_PENDING = 1; // Means that requested waiting for recipient action
+  STATUS_ACCEPTED = 2; // Means that friendship is active for both users
+  STATUS_BLOCKED = 3; // Means that one of friend did block another and friendship exists but is inactive
 }
