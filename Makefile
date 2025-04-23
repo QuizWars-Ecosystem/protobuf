@@ -29,7 +29,7 @@ gen-doc:
 	protoc \
 		--proto_path=. \
 		--doc_out=../docs/QuizWars/tech/grpc \
-		--doc_opt=markdown,Proto.md \
+		--doc_opt=./templates/api-template.tmpl,API-Reference.md,source_relative \
 		./external/users/v1/*.proto \
 		./external/questions/v1/*.proto
 

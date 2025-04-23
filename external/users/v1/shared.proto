@@ -10,7 +10,7 @@ import "google/protobuf/timestamp.proto";
 * Message represents user profile that can be shown only for his owner
 */
 message Profile {
-  string id = 1; // User if is actually UUID
+  string id = 1; // User id is actually UUID
   int32 avatar_id = 2; // Is a id of avatars preset
   string username = 3; // Username is a string, no longer then 32 char
   string email = 4; // Email is a string, no longer then 128 char
@@ -24,7 +24,7 @@ message Profile {
 * Message represents user profile that can be shown anyone
 */
 message User {
-  string id = 1; // User if is actually UUID
+  string id = 1; // User id is actually UUID
   int32 avatar_id = 2; // Is a id of avatars preset
   string username = 3; // Username is a string, no longer then 32 char
   int32 rating = 4; // Is a int filed that represents user rating
@@ -36,7 +36,7 @@ message User {
 * Message represents user profile that can be shown only admin
 */
 message UserAdmin {
-  string id = 1; // User if is actually UUID
+  string id = 1; // User id is actually UUID
   int32 avatar_id = 2; // Is a id of avatars preset
   string username = 3; // Username is a string, no longer then 32 char
   string email = 4; // Email is a string, no longer then 128 char
@@ -48,7 +48,7 @@ message UserAdmin {
 }
 
 /**
-* Message represents user's friends, actually is a list io user profiles with friendship status
+* Message represents user's friends, actually is a list of user profiles with friendship status
 */
 message FriendsList {
   repeated Friend friends = 1;
@@ -56,7 +56,7 @@ message FriendsList {
 
 message Friend {
   User user = 1; // A user that interact with another
-  Status status = 2; // Status of friendship, this is shared status, it means if one person accepted request on fiendship, it will be accepted fot both
+  Status status = 2; // Status of friendship, this is shared status, it means if one person accepted request on fiendship, it will be accepted for both
 }
 
 enum Status {

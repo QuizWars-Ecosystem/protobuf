@@ -1,0 +1,88 @@
+# Table of Contents
+
+{{range .Files}}
+> **{{ .Name }}**
+{{if .HasServices}}
+- Services
+  {{range .Services}}  - [[#{{.Name}}]]
+  {{end}}
+{{end}}
+{{if .HasMessages}}
+- Messages
+  {{range .Messages}}  - [[#{{.LongName}}]]
+  {{end}}
+{{end}}
+{{if .HasEnums}}
+- Enums
+  {{range .Enums}}  - [[#{{.LongName}}]]
+  {{end}}
+{{end}}
+---
+{{end}}
+> - [[#Scalar Value Types]]
+
+{{range .Files}}
+
+{{range .Services -}}
+# {{.Name}}
+{{.Description}}
+
+{{range .Methods -}}
+## {{.Name}}
+
+{{ .Description}}
+
+```proto
+rpc {{.Name}}({{.RequestLongType}}) returns ({{.ResponseLongType}})
+```
+> Input: [[#{{.RequestLongType}}]]
+> Output: [[#{{.ResponseLongType}}]]
+
+{{end}} <!-- end methods -->
+{{end}} <!-- end services -->
+
+---
+
+# Messages
+{{range .Messages}}
+
+## {{.LongName}}
+{{.Description}}
+
+{{if .HasFields}}
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+{{range .Fields -}}
+	| {{if .IsOneof}}[**oneof**](https://developers.google.com/protocol-buffers/docs/proto3#oneof) {{.OneofDecl}}.{{end}}{{.Name}} | [{{if .IsMap}}map {{else}}{{.Label}} {{end}}{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{if .Description}}{{nobr .Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}}{{else}}none{{end}} |
+{{end}} <!-- end Fields -->
+{{end}} <!-- end HasFields -->
+{{end}} <!-- end messages -->
+
+---
+
+{{if .HasEnums}}
+
+# Enums
+{{range .Enums}}
+
+## {{.LongName}}
+{{.Description}}
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+{{range .Values -}}
+	| {{.Name}} | {{.Number}} | {{if .Description}}{{nobr .Description}}{{else}}none{{end}} |
+{{end}}
+
+{{end}} <!-- end Enums -->
+{{end}} <!-- end Files -->
+---
+{{end}}
+
+# Scalar Value Types
+
+| .proto Type | Notes | Go Type | Java Type | Python Type |
+| ----------- | ----- | -------- | --------- | ----------- |
+{{range .Scalars -}}
+  | <div><h4 id="{{.ProtoType | lower | replace "." ""}}" /></div><a name="{{.ProtoType}}" /> {{.ProtoType}} | {{.Notes}} | {{.GoType}} | {{.JavaType}} | {{.PythonType}} |
+{{end}}
