@@ -6,27 +6,43 @@ option go_package = "questions/v1;questionsv1";
 
 import "external/questions/v1/shared.proto";
 
+/**
+*   Questions service is a service for getting desired questions
+*/
 service QuestionsService {
+
+  // Method for getting questions with light filter
   rpc GetQuestions(GetQuestionsRequest) returns (QuestionsResponse);
+
+  // Method for getting batch of questions with heavy filter
   rpc GetQuestionBatch(GetQuestionBatchRequest) returns (QuestionsResponse);
 }
 
+/**
+* Represents a light filter for getting desired questions
+*/
 message GetQuestionsRequest {
-  Difficulty difficulty = 1;
-  string language = 2;
-  int32 category_id = 3;
-  int32 amount = 4;
+  Difficulty difficulty = 1; // Desired difficulty
+  string language = 2; // Desired question language
+  int32 category_id = 3; // Desired question category id
+  int32 amount = 4; // Amount of desired questions
 }
 
+/**
+* Represents a heavy filtered request for getting questions
+*/
 message GetQuestionBatchRequest {
-  repeated Type types = 1;
-  repeated Source sources = 2;
-  repeated Difficulty difficulties = 3;
-  repeated int32 categories_ids = 4;
-  string language = 5;
-  int32 amount = 6;
+  repeated Type types = 1; // List of desired question's types
+  repeated Source sources = 2; // List of desired questions' sources
+  repeated Difficulty difficulties = 3; // List of desired question's difficulties
+  repeated int32 categories_ids = 4; // List of desired question's categories ids
+  string language = 5; // Language of requesting question
+  int32 amount = 6; // Amount of desired questions
 }
 
+/**
+* Represents of requested, filtered questions list
+*/
 message QuestionsResponse {
-  repeated Question questions = 1;
+  repeated Question questions = 1; // List of resulted questions
 }

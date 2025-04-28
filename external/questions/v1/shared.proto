@@ -6,34 +6,43 @@ option go_package = "questions/v1;questionsv1";
 
 import "google/protobuf/timestamp.proto";
 
+/**
+* Message represents a question
+*/
 message Question {
-  string id = 1;
-  Type type = 2;
-  Source source = 3;
-  Difficulty difficulty = 4;
-  Category category = 5;
-  string text = 6;
-  repeated Option options = 7;
-  string language = 8;
-  google.protobuf.Timestamp created_at = 9;
+  string id = 1; // ID of question is UUID v4
+  Type type = 2; // Type of question is a enum value
+  Source source = 3; // Source of question is a enum value
+  Difficulty difficulty = 4; // Difficulty is a enum value
+  Category category = 5; // Category is a pair of id of category and it's name
+  string text = 6; // Text of a question
+  repeated Option options = 7; // List of question options
+  string language = 8; // Language of a question
+  google.protobuf.Timestamp created_at = 9; // Date when a questing was added
 }
 
+/**
+* Message represents a question's option
+*/
 message Option {
-  string id = 1;
-  string text = 2;
-  bool is_correct = 3;
+  string id = 1; // ID of option is UUID v4
+  string text = 2; // Text of question option
+  bool is_correct = 3; // Filed that shows is it correct answer or not
 }
 
+/**
+* Message represents a category pf question
+*/
 message Category {
-  int32 id = 1;
-  string name = 2;
+  int32 id = 1; // ID is integer type
+  string name = 2; // Name of category
 }
 
 enum Type {
   TYPE_UNSPECIFIED = 0;
-  TYPE_SINGLE = 1;
-  TYPE_MULTI = 2;
-  TYPE_BETTING = 3;
+  TYPE_SINGLE = 1; // Question has definitely only one correct option
+  TYPE_MULTI = 2;  // Question has one or more correct option
+  TYPE_BETTING = 3; // Question has ability make a bid on question answer
 }
 
 enum Source {

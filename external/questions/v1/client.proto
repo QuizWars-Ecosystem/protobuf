@@ -7,10 +7,18 @@ option go_package = "questions/v1;questionsv1";
 import "google/protobuf/empty.proto";
 import "external/questions/v1/shared.proto";
 
+/**
+* Questions Client Service provides methods for clients
+*/
 service QuestionsClientService {
+
+  // Method allows get all existing categories
   rpc GetCategories(google.protobuf.Empty) returns (GetCategoriesResponse);
 }
 
+/**
+* Represents message with all existing categories is server
+*/
 message GetCategoriesResponse {
   repeated Category categories = 1;
 }

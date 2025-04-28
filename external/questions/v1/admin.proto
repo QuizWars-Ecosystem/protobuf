@@ -8,82 +8,131 @@ import "external/questions/v1/shared.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
+/**
+* Questions Admin Service provides methods for admin's access and management
+*/
 service QuestionsAdminService {
+
+  // Method for getting paginated list of questions that can be requested with filters
   rpc GetFilteredQuestions(GetFilteredQuestionsRequest) returns (GetFilteredQuestionsResponse);
+
+  // Method for creating new category
   rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse);
+
+  // Method lets create a question with options
   rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
+
+  // Method for updating existing category
   rpc UpdateCategory(UpdateCategoryRequest) returns (google.protobuf.Empty);
+
+  // Method for updating question data by it's ID
   rpc UpdateQuestion(UpdateQuestionRequest) returns (google.protobuf.Empty);
+
+  // Method for updating question's options
   rpc UpdateQuestionOption(UpdateQuestionOptionRequest) returns (google.protobuf.Empty);
+
+  // Method for deleting a question from database
   rpc DeleteQuestion(DeleteQuestionRequest) returns (google.protobuf.Empty);
+
+  // Method for deleting a question's options from database
   rpc DeleteQuestionOption(DeleteQuestionOptionRequest) returns (google.protobuf.Empty);
 }
 
+/**
+* Represents a request argument for creating new category
+*/
 message CreateCategoryRequest {
-  string name = 1;
+  string name = 1; // Field is a name for new category
 }
 
+/**
+* Represents a response result of a request for creating category
+*/
 message CreateCategoryResponse {
-  int32 id = 1;
+  int32 id = 1; // ID is ID of created category
 }
 
+/**
+* Represents a request argument for creating new questions with options
+*/
 message CreateQuestionRequest {
-  Type type = 1;
-  Difficulty difficulty = 2;
-  int32 category_id = 3;
-  string text = 4;
-  repeated Option options = 5;
-  string language = 6;
-  optional string media_url = 7;
+  Type type = 1; // Question type
+  Difficulty difficulty = 2; // Difficulty of the question
+  int32 category_id = 3; // Question's category ID
+  string text = 4; // Text of the question
+  repeated Option options = 5; // Possible answers for the question
+  string language = 6; // Language of the question
+  optional string media_url = 7; // Media URL if it has
 }
 
+/**
+* Represents a argument of update category request
+*/
 message UpdateCategoryRequest {
   int32 id = 1;
   string name = 2;
 }
 
+/**
+* Represents a request argument for update question data, allows edit types, difficulty, category, text and language
+*/
 message UpdateQuestionRequest {
-  string id = 1;
-  optional Type type = 2;
-  optional Difficulty difficulty = 3;
-  optional int32 category_id = 4;
-  optional string text = 5;
-  optional string language = 6;
+  string id = 1; // ID of the question
+  optional Type type = 2; // New type
+  optional Difficulty difficulty = 3; // New difficulty
+  optional int32 category_id = 4; // New category of the question
+  optional string text = 5; // New text of the question
+  optional string language = 6; // New language for the language
 }
 
+/**
+* Represents a request argument for update question's option
+*/
 message UpdateQuestionOptionRequest {
-  string id = 1;
-  optional string text = 2;
-  optional bool is_correct = 3;
+  string id = 1; // ID of the option
+  optional string text = 2; // New text for option
+  optional bool is_correct = 3; // Is it right option or not
 }
 
+/**
+* Represent argument for deleting question request
+*/
 message DeleteQuestionRequest {
   string id = 1;
 }
 
+/**
+* Represent argument for deleting question's option request
+*/
 message DeleteQuestionOptionRequest {
   string id = 1;
 }
 
+/**
+* Represents a componential argument of request for getting paginated questions with filters
+*/
 message GetFilteredQuestionsRequest {
-  uint64 page = 1;
-  uint64 size = 2;
-  optional Order order = 3;
-  optional Sort sort = 4;
-  optional TypeFilter type_filter = 5;
-  optional DifficultyFilter difficulty_filter = 6;
-  optional CategoryFilter category_filter = 7;
-  optional LanguageFilter language_filter = 8;
-  optional CreatedAtFilter create_at_filter = 9;
+  uint64 page = 1; // Page of the requested content, by default must me 1
+  uint64 size = 2; // Amount of requesting questions
+  optional Order order = 3; // What order should be
+  optional Sort sort = 4; // Sort of the resulted questions
+  optional TypeFilter type_filter = 5; // What type of question should be
+  optional DifficultyFilter difficulty_filter = 6; // Desired difficulty of questions
+  optional CategoryFilter category_filter = 7; // Desired category
+  optional LanguageFilter language_filter = 8; // What language of questions
+  optional CreatedAtFilter create_at_filter = 9; // When questions were created
 }
 
+/**
+* Represents a response of requested, filtered and paginated questions
+*/
 message GetFilteredQuestionsResponse {
-  repeated Question questions = 1;
-  uint64 page = 2;
-  uint64 size = 3;
-  Order order = 4;
-  Sort sort = 5;
-  int64 amount = 6;
+  repeated Question questions = 1; // List of resulted questions
+  uint64 page = 2; // Current requested page
+  uint64 size = 3; // Amount of current
+  Order order = 4; // Order of resulted questions list
+  Sort sort = 5; // Sort of resulted questions list
+  int64 amount = 6; // Total amount of possible to request with the same request filter questions
 }
 
 enum Order {
@@ -104,22 +153,22 @@ enum Sort {
 }
 
 message TypeFilter {
-  repeated Type types = 1;
+  repeated Type types = 1; // List of desired questions types
 }
 
 message DifficultyFilter {
-  repeated Difficulty difficulties = 1;
+  repeated Difficulty difficulties = 1; // List of desired questions difficulties
 }
 
 message CategoryFilter {
-  repeated int32 categories = 1;
+  repeated int32 categories = 1; // List of desired questions categories
 }
 
 message LanguageFilter {
-  repeated string languages = 1;
+  repeated string languages = 1; // List of desired questions languages
 }
 
 message CreatedAtFilter {
-  google.protobuf.Timestamp from = 1;
-  google.protobuf.Timestamp to = 2;
+  google.protobuf.Timestamp from = 1; // Start interval date for desired question
+  google.protobuf.Timestamp to = 2;   // End interval date for desired question
 }
