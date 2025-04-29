@@ -22,6 +22,9 @@ service QuestionsAdminService {
   // Method lets create a question with options
   rpc CreateQuestion(CreateQuestionRequest) returns (google.protobuf.Empty);
 
+  // Method lets create and add a question's option to existing question
+  rpc CreateQuestionOption(CreateQuestionOptionRequest) returns (google.protobuf.Empty);
+
   // Method for updating existing category
   rpc UpdateCategory(UpdateCategoryRequest) returns (google.protobuf.Empty);
 
@@ -63,6 +66,15 @@ message CreateQuestionRequest {
   repeated Option options = 5; // Possible answers for the question
   string language = 6; // Language of the question
   optional string media_url = 7; // Media URL if it has
+}
+
+/**
+* Represents a request argument for creating and appending a option for existing question
+*/
+message CreateQuestionOptionRequest {
+  string question_id = 1; // ID of a question
+  string text = 2; // Text for new option
+  bool is_correct = 3; // Is option correct answer or not
 }
 
 /**
