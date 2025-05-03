@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package lobbyservice.v1;
+
+option go_package = "lobby/v1;lobbyv1";
+
+/**
+* Lobby service is the service for matching players in online games
+*/
+service LobbyService {
+  // Method for request a game session for online games
+  rpc JoinLobby(JoinLobbyRequest) returns (stream LobbyStatus);
+}
+
+/**
+* Represents a request argument for search lobby with params
+*/
+message JoinLobbyRequest {
+  string player_id = 1; // ID of requester player
+  int32 rating = 2; // Rating of a player
+  repeated int32 category_ids = 3; // Desired categories ids
+  string mode = 4; // Selected game mode for playing
+}
+
+/**
+* Represent a stream message with status of request for searching lobby
+*/
+message LobbyStatus {
+  string lobby_id = 1; // ID of lobby where is a player
+  int32 current_players = 2; // Current amounts of players in lobby
+  int32 max_players = 3; // Amount of maximum possible players in a lobby
+  Status status = 4; // Current lobby status
+  string game_id = 5; // If lobby is ready, game_id represents a ID of created game for future request, by default is empty
+}
+
+/**
+* Represents a lobby status as enum
+*/
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_WAITING = 1; // Lobby is waiting another players
+  STATUS_STARTING = 2; // Lobby is ready to start a game
+  STATUS_TIMEOUT = 3; // Lobby is expired and player should find another one
+  STATUS_ERROR = 4; // Some error in a lobby, lobby not working more
+}
